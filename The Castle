@@ -8,14 +8,15 @@
   char life = 1;  
   
 //variables de personnage
-  int playerMoves_x = 20;  //lieu d'apparition sur l'axe x
-  int playerMoves_y = 17; //lieu d'apparition sur l'axe y, variera en fonction de jump et gravity
+  int playerPosition_x = 20;  //lieu d'apparition sur l'axe x
+  int playerPosition_y = 17; //lieu d'apparition sur l'axe y, variera en fonction de jump et gravity
   int jump = 4;
   int lifePlayer = 10;  //vie de base
-    int eatPlayer = 10; //faim de base
+  int eatPlayer = 10; //faim de base
     
 //variables d'ennemis
   int ennemiesMoves_x = 10;  //vitesse des ennemies
+  int positonEnnemie_x = 40;  //lieu d'apparition des ennemies
 
 
 //créations des coeurs de vie
@@ -42,8 +43,12 @@ void loop() {
   while(!gb.update());
   
 //ENTREE
-  if(gb.buttons.pressed(BUTTON_RIGHT)) {
-    int playerMoves_x = playerMoves_x + 1;  //déplacer personnage a droite
+  if(gb.buttons.repeat(BUTTON_RIGHT, 0)) {  //déplacer personnage a droite
+     playerPosition_x = playerPosition_x + 2;  
+  }
+
+  if(gb.buttons.repeat(BUTTON_LEFT, 0)) {
+    playerPosition_x = playerPosition_x - 2;
   }
 
 
@@ -52,7 +57,7 @@ void loop() {
 
 //AFFICHAGE     //note a moi-meme : animer la carte
   gb.display.drawImage(0, 0, map_testData);  //carte
-  gb.display.drawImage(playerMoves_x, 26, h_roineData);  //héroine
+  gb.display.drawImage(playerPosition_x, 26, h_roineData);  //héroine
   
   gb.display.drawImage(3, 0, coeurData);  //coeur de vie
   gb.display.drawImage(9, 0, coeurData);  //coeur de vie
@@ -61,6 +66,8 @@ void loop() {
   gb.display.drawImage(52, 0, nourritureData);  //nourriture
   gb.display.drawImage(58, 0, nourritureData);  //nourriture
   gb.display.drawImage(64, 0, nourritureData);  //nourriture
+
+
 
 
 
